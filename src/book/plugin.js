@@ -25,16 +25,18 @@ require(['gitbook', 'jQuery'], function (gitbook, $) {
     // Hide navigation if a search is ative
     const $bookSearchResults = $('#book-search-results');
 
-    const observer = new MutationObserver(() => {
-      if ($bookSearchResults.hasClass('open')) {
-        $('.intopic-toc').hide();
-      }
-      else {
-        $('.intopic-toc').show();
-      }
-    });
+    if ($bookSearchResults.length > 0) {
+      const observer = new MutationObserver(() => {
+        if ($bookSearchResults.hasClass('open')) {
+          $('.intopic-toc').hide();
+        }
+        else {
+          $('.intopic-toc').show();
+        }
+      });
 
-    observer.observe($bookSearchResults[0], { attributes: true });
+      observer.observe($bookSearchResults[0], { attributes: true });
+    }
   });
 
   gitbook.events.bind('page.change', function () {
